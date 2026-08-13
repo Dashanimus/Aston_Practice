@@ -9,7 +9,7 @@ public class Main {
         System.out.println("Задание 3:");
         printColor(10);
         System.out.println("Задание 4:");
-        compareNumbers(90,101);
+        compareNumbers(90, 101);
         System.out.println("Задание 5:");
         checkSumRange(10, 10);
         System.out.println("Задание 6:");
@@ -29,7 +29,7 @@ public class Main {
         System.out.println("Задание 13:");
         squareArray(3);
         System.out.println("Задание 14:");
-        lenArray(3,7);
+        lenArray(3, 7);
     }
 
 
