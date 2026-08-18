@@ -1,7 +1,3 @@
-# VS Code
-.vscode/
-*.code-workspace
-
 # Java compilation artifacts
 *.class
 *.log
@@ -13,7 +9,3 @@
 
 # Maven
 target/
-
-# Gradle
-.gradle/
-build/
