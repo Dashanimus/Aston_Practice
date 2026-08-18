@@ -1,19 +1,2 @@
-# VS Code
-.vscode/
-*.code-workspace
-
-# Java compilation artifacts
-*.class
-*.log
-
-# Package files
-*.jar
-*.war
-*.ear
-
 # Maven
 target/
-
-# Gradle
-.gradle/
-build/
