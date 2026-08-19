@@ -9,28 +9,28 @@ public class Main {
         System.out.println("Задание 2:");
         checkSumSign();
         System.out.println("Задание 3:");
-        printColor(10);
+        printColor();
         System.out.println("Задание 4:");
-        compareNumbers(90, 101);
-        System.out.println("Задание 5:");
+        compareNumbers();
+        System.out.println("Задание 5: Возвращает true/false, не сказано выводить в консоль");
         checkSumRange(10, 10);
         System.out.println("Задание 6:");
         checkNumber(-1);
-        System.out.println("Задание 7:");
+        System.out.println("Задание 7: Возвращает true/false, не сказано выводить в консоль");
         booleanNumber(12);
         System.out.println("Задание 8:");
         printString("Это строка", 3);
-        System.out.println("Задание 9:");
+        System.out.println("Задание 9: Возвращает true/false, не сказано выводить в консоль");
         checkYear(2026);
-        System.out.println("Задание 10:");
+        System.out.println("Задание 10: Не сказано выводить в консоль");
         changeArray();
-        System.out.println("Задание 11:");
+        System.out.println("Задание 11: Не сказано выводить в консоль");
         emptyArray();
-        System.out.println("Задание 12:");
+        System.out.println("Задание 12: Не сказано выводить в консоль");
         multiplyArray();
-        System.out.println("Задание 13:");
+        System.out.println("Задание 13: Не сказано выводить в консоль");
         squareArray(3);
-        System.out.println("Задание 14:");
+        System.out.println("Задание 14: Возвращает массив, не сказано выводить в консоль");
         lenArray(3, 7);
     }
 
@@ -42,17 +42,18 @@ public class Main {
 
     // Задание 2
     public static void checkSumSign() {
-        int a = 3, b = 6, sum = a + b;
-        if (sum >= 0){
-            System.out.println("Cумма положительная " + "(" + sum + ")");
+        int a = 3, b = 6;
+        if (a + b >= 0){
+            System.out.println("Cумма положительная");
         }
         else {
-            System.out.println(sum + "Сумма отрицательная " + "(" + sum + ")");
+            System.out.println("Сумма отрицательная ");
         }
     }
 
     // Задание 3
-    public static void printColor(int value) {
+    public static void printColor() {
+        int value = 10;
         if (value <= 0){
             System.out.println("Красный");
         }
@@ -65,27 +66,25 @@ public class Main {
     }
 
     // Задание 4   
-    public static void compareNumbers(int a, int b) {
+    public static void compareNumbers() {
+        int a = 90, b = 101;
         System.out.println("a " + (a >= b ? ">=":"<") + " b");  // ? - тернарный оператор вместо if-else
     }
     
     // Задание 5
     public static boolean checkSumRange(int x, int y) {
-        int sum = x + y;
-        boolean b = sum >= 10 && sum <= 20;
-        System.out.println(b);
+        boolean b = x + y >= 10 && x + y <= 20;
         return b;
     }
 
     // Задание 6
     public static void checkNumber(int a) {
-        System.out.println("a = " + a + (a >= 0 ? " -> положительное число" : " -> отрицательное число"));
+        System.out.println(a >= 0 ? "Положительное число" : "Отрицательное число");
     }
 
     // Задание 7
     public static boolean booleanNumber(int a) {
         boolean b  = a < 0;     // true - если отрицательное!
-        System.out.println(b);
         return b;
     }
 
@@ -99,7 +98,6 @@ public class Main {
     // Задание 9 (каждый 4й год - високосный, кроме 100го или каждый 400й - високосный)
     public static boolean checkYear(int year) {
         boolean b = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
-        System.out.println(b);
         return(b);
     }   
 
@@ -109,7 +107,6 @@ public class Main {
         for (int i = 0; i < arr.length; i++) {
             arr[i] = arr[i] == 0 ? 1 : 0; 
         }
-        System.out.println(Arrays.toString(arr));
     }
 
     // Задание 11
@@ -118,10 +115,6 @@ public class Main {
         for (int i = 0; i < arr.length; i++){
             arr[i] = i + 1;
         }
-        for (int i : arr) {
-        System.out.print(i + " ");
-        }
-        System.out.println();
     }
 
     // Задание 12
@@ -130,7 +123,6 @@ public class Main {
         for (int i = 0; i < arr.length; i++) {
            arr[i] = arr[i] < 6 ? arr[i] * 2 : arr[i];
         }
-        System.out.println(Arrays.toString(arr));
     }
 
     // Задание 13
@@ -140,13 +132,6 @@ public class Main {
     for (int i = 0; i < n; i++) {
         arr[i][i] = 1;
         arr[i][n - 1 - i] = 1; // индекс столбца = n - 1 - i
-    }
-
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            System.out.print(arr[i][j] + " ");
-        }
-        System.out.println();
         }
     }
 
@@ -156,7 +141,6 @@ public class Main {
         for (int i = 0; i < len; i++) {
             arr[i] = initialValue;
         }
-        System.out.println(Arrays.toString(arr));
         return arr;
     }
 }
