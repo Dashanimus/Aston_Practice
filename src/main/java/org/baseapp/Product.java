@@ -17,9 +17,9 @@ public class Product {
         this.isReserved = isReserved;
     }
 
-    public void printInfo() {
+        public void getInfo() {
         System.out.println("--- Информация о товаре ---");
-        System.out.println("Название: " + productName);
+        System.out.println("Название продукта: " + productName);
         System.out.println("Дата производства: " + manufactureDate);
         System.out.println("Производитель: " + manufacturer);
         System.out.println("Страна происхождения: " + originCountry);

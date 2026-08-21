@@ -2,6 +2,9 @@ package org.baseapp;
 
 public class Main {
     public static void main(String[] args) {
+        Product extra = new Product("Samsung Galaxy A52 5G", "27.06.2021", "Samsung Corp.", "Korea", 150, true);
+        extra.getInfo();
+
         Product[] productsArray = new Product[5];
 
         productsArray[0] = new Product("Samsung S25 Ultra", 
@@ -39,9 +42,9 @@ public class Main {
         55000, 
         false);
 
-        System.out.println("--- СПИСОК ТОВАРОВ ---\n");
-        for (Product currentProduct : productsArray) {
-            currentProduct.printInfo();
-        }
+        Park DivoPark = new Park("Диво Остров", "Санкт-Петербург, Приморский парк Победы", "11:00", "22:00");
+        DivoPark.addAttraction("Колесо Обозрения", "11:00-21:00", 700);
+        DivoPark.addAttraction("Петля Нестерова", "11:00-22:00", 600);
+        
     }
 }
