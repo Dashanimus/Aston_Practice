@@ -1,11 +1,2 @@
-# Java compilation artifacts
-*.class
-*.log
-
-# Package files
-*.jar
-*.war
-*.ear
-
 # Maven
 target/
