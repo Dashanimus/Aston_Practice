@@ -16,7 +16,7 @@ public class Main {
         studentSet.add(new Student("Мария Иванова", "В-31", 3, List.of(3, 3, 4, 3)));
 
         StudentService.processStudents(studentSet);
-       // studentSet.forEach(System.out::println); - Не сказано, надо ли выводить полный список после удаления студентов с ср. баллом < 3
+       // studentSet.forEach(System.out::println); - Не сказано, надо ли выводить полный список после удаления студентов со ср. баллом < 3
         StudentService.printStudents(studentSet, 2); 
 
         System.out.println("\nЗадание 2:");
