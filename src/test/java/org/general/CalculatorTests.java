@@ -1,48 +1,65 @@
 package org.general;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.testng.Assert.*;
 
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.testng.annotations.*;
 
 public class CalculatorTests {
 
-    @ParameterizedTest(name = "Сложение: {0} + {1} = {2} (Индекс: {index})")
-    @CsvSource({
-            "10, 15, 25",
-            "-3, 0, -3" })
+    @DataProvider(name = "addData")
+    public Object[][] addData() {
+        return new Object[][] {
+                { 10, 5, 15 },
+                { -5, 0, -5 }
+        };
+    }
+
+    @Test(dataProvider = "addData", description = "Тест сложения чисел")
     public void testAdd(int a, int b, int expected) {
-        assertEquals(expected, Calculator.add(a, b));
+        assertEquals(Calculator.add(a, b), expected);
     }
 
-    @ParameterizedTest(name = "Вычитание (не равно): {0} - {1} != {2} (Индекс: {index})")
-    @CsvSource({
-            "15, 5, 5",
-            "-15, 0, -5" })
+    @DataProvider(name = "subtractData")
+    public Object[][] subtractData() {
+        return new Object[][] {
+                { 10, 5, 5 },
+                { -5, 0, -5 }
+        };
+    }
+
+    @Test(dataProvider = "subtractData", description = "Тест вычитания чисел")
     public void testSubtract(int a, int b, int expected) {
-        assertNotEquals(expected, Calculator.subtract(a, b));
+        assertEquals(Calculator.subtract(a, b), expected);
     }
 
-    @ParameterizedTest(name = "Умножение: {0} * {1} = {2} (Индекс: {index})")
-    @CsvSource({
-            "10, 3, 30",
-            "-15, 0, 0" })
+    @DataProvider(name = "multiplyData")
+    public Object[][] multiplyData() {
+        return new Object[][] {
+                { 10, 5, 50 },
+                { -5, 0, 0 }
+        };
+    }
+
+    @Test(dataProvider = "multiplyData", description = "Тест умножения чисел")
     public void testMultiply(int a, int b, int expected) {
-        assertEquals(expected, Calculator.multiply(a, b));
+        assertEquals(Calculator.multiply(a, b), expected);
     }
 
-    @ParameterizedTest(name = "Деление: {0} / {1} = {2} (Индекс: {index})")
-    @CsvSource({
-            "10, 5, 2",
-            "-5, 1, -5" })
-    public void testDivide(int a, int b, int expected) {
-        assertEquals(expected, Calculator.divide(a, b));
+    @DataProvider(name = "divideData")
+    public Object[][] divideData() {
+        return new Object[][] {
+                { 10, 5, 2.0 },
+                { -5, 1, -5.0 }
+        };
     }
 
-    @Test
-    @DisplayName("Деление на 0")
+    @Test(dataProvider = "divideData", description = "Тест деления чисел")
+    public void testDivide(int a, int b, double expected) {
+        assertEquals(Calculator.divide(a, b), expected, 0.001);
+    }
+
+    @Test(expectedExceptions = ArithmeticException.class)
     public void testDivideByZero() {
-        assertThrows(ArithmeticException.class, () -> Calculator.divide(10, 0));
+        Calculator.divide(10, 0);
     }
 }

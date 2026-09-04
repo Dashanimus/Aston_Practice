@@ -1,27 +1,22 @@
 package org.general;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.testng.Assert.*;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.*;
 
 public class TriangleAreaTests {
     @Test
-    @DisplayName("Площадь треугольника - Норма")
     public void testAreaNormal() {
-        assertEquals(15.0, TriangleArea.area(5.0, 6.0));
+        assertEquals(TriangleArea.area(5.0, 6.0), 15.0);
     }
 
-    @Test
-    @DisplayName("Площадь треугольника - Основание <= 0")
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testAreaNegativeBase() {
-        assertThrows(IllegalArgumentException.class, () -> TriangleArea.area(-5.0, 4.0));
+        TriangleArea.area(-5.0, 4.0);
     }
 
-    @Test
-    @DisplayName("Площадь треугольника - Высота <= 0")
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testAreaNegativeHeight() {
-        assertThrows(IllegalArgumentException.class, () -> TriangleArea.area(5.0, 0.0));
+        TriangleArea.area(5.0, -4.0);
     }
 }

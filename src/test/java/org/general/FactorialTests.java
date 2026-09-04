@@ -1,26 +1,23 @@
 package org.general;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.testng.Assert.*;
 
-import org.junit.jupiter.api.*;
+import org.testng.annotations.*;
 
 public class FactorialTests {
 
     @Test
-    @DisplayName("Факториал - Равенство")
     public void testFactorialEquals() {
-        assertEquals(1, Factorial.calculate(1));
+        assertEquals(Factorial.calculate(3), 6);
     }
 
     @Test
-    @DisplayName("Факториал - Неравенство")
     public void testFactorialNotEquals() {
-        assertNotEquals(3628880, Factorial.calculate(10));
+        assertNotEquals(Factorial.calculate(10), 3628880);
     }
 
-    @Test
-    @DisplayName("Факториал - Отрицательное число")
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testFactorialNegative() {
-        assertThrows(IllegalArgumentException.class, () -> Factorial.calculate(-3));
+        Factorial.calculate(-5);
     }
 }
