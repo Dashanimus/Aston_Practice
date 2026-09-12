@@ -1,4 +1,4 @@
-package org.baseapp;
+package org.general;
 
 public class Main {
     public static void main(String[] args) {
