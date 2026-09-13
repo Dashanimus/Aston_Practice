@@ -67,15 +67,13 @@ public class MTSPaymentTests extends BaseTest {
     @Test
     @DisplayName("Проверка заполненных данных")
     public void testCommunicationServicesFullPaymentFlow() {
-        WebElement communicationService = mainPage.waitForElementClickable(By.xpath("//ul[@class='select__list']//li"));
-        communicationService.click();
 
         WebElement phoneNumberField = mainPage.waitForVisibilityLocatedBy(By.id("connection-phone"));
         WebElement sumField = mainPage.waitForVisibilityLocatedBy(By.id("connection-sum"));
         WebElement emailField = mainPage.waitForVisibilityLocatedBy(By.id("connection-email"));
 
         String testPhone = "297777777";
-        String testSum = "900.00";
+        String testSum = "90.00";
         String testEmail = "lesson10@example.com";
 
         phoneNumberField.sendKeys(testPhone);
