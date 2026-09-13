@@ -9,8 +9,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MTSPaymentTest extends BaseTest {
-        private MTSMainPage mainPage;
+public class MTSPaymentTests extends BaseTest {
+    private MTSMainPage mainPage;
+    
     @BeforeEach
     public void initPage() {
         mainPage = new MTSMainPage(driver);

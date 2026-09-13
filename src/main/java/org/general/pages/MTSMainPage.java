@@ -86,4 +86,20 @@ public class MTSMainPage {
     public void clickContinueButton() {
         driver.findElement(submitButton).click();
     }
+
+    public WebElement waitForExists(By by) { 
+        return wait.until(ExpectedConditions.presenceOfElementLocated(by));
+    }
+
+    public WebElement waitForVisibilityLocatedBy(By by) { 
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+    }
+
+    public WebElement waitForElementClickable(By by) {
+        return wait.until(ExpectedConditions.elementToBeClickable(by));
+    }
+
+    public List<WebElement> waitForAllExistElementsLocatedBy(By locator) {
+        return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+    }
 }
