@@ -9,10 +9,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
+import java.time.Duration;
 
 public class MTSPaymentTests extends BaseTest {
     private MTSMainPage mainPage;
@@ -68,41 +71,44 @@ public class MTSPaymentTests extends BaseTest {
     @DisplayName("Проверка заполненных данных")
     public void testCommunicationServicesFullPaymentFlow() {
 
-        WebElement phoneNumberField = mainPage.waitForVisibilityLocatedBy(By.id("connection-phone"));
-        WebElement sumField = mainPage.waitForVisibilityLocatedBy(By.id("connection-sum"));
-        WebElement emailField = mainPage.waitForVisibilityLocatedBy(By.id("connection-email"));
+        WebElement phoneNumberField = mainPage.waitForVisibilityLocatedBy(By.xpath("//*[@id=\"connection-phone\"]"));
+        WebElement sumField = mainPage.waitForVisibilityLocatedBy(By.xpath("//*[@id=\"connection-sum\"]"));
+        WebElement emailField = mainPage.waitForVisibilityLocatedBy(By.xpath("//*[@id=\"connection-email\"]"));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         String testPhone = "297777777";
-        String testSum = "90.00";
-        String testEmail = "lesson10@example.com";
+        String testSum = "90";
+        String testEmail = "test@example.com";
 
         phoneNumberField.sendKeys(testPhone);
         sumField.sendKeys(testSum);
         emailField.sendKeys(testEmail);
 
-        WebElement continueButton = mainPage.waitForElementClickable(By.xpath("//form[@id='pay-connection']//button[contains(text(), 'Продолжить')]"));
+        WebElement continueButton = mainPage.waitForElementClickable(By.xpath("//*[@id=\"pay-connection\"]/button"));
         continueButton.click();
 
-        WebElement paymentInfoSum = mainPage.waitForVisibilityLocatedBy(By.xpath("//div[contains(@class, 'payment-info__sum') or contains(text(), 'BYN')]"));
-        Assertions.assertTrue(paymentInfoSum.getText().contains(testSum), "Сумма в инфо-блоке платежного окна отображается некорректно");
+        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(0));
 
-        WebElement payButton = mainPage.waitForVisibilityLocatedBy(By.xpath("//button[contains(@class, 'pay-btn') or @type='submit']"));
-        Assertions.assertTrue(payButton.getText().contains(testSum), "Сумма на кнопке оплаты не совпадает с введенной");
+        WebElement paymentInfoSum = mainPage.waitForVisibilityLocatedBy(By.xpath("/html/body/app-root/div/div/div/app-payment-container/section/div/div/div[1]/div[1]/span"));
+        Assertions.assertTrue(paymentInfoSum.getText().contains(testSum + ".00 BYN"), "Сумма в инфо-блоке платежного окна отображается некорректно");
+
+        WebElement payButton = mainPage.waitForVisibilityLocatedBy(By.xpath("/html/body/app-root/div/div/div/app-payment-container/section/div/app-card-page/div/div[1]/button"));
+        Assertions.assertTrue(payButton.getText().contains("Оплатить " + testSum + ".00 BYN"), "Сумма на кнопке оплаты не совпадает с введенной");
 
 
-        WebElement paymentInfoPhone = mainPage.waitForVisibilityLocatedBy(By.xpath("//div[contains(@class, 'payment-info__phone') or contains(text(), '297777777')]"));
-        Assertions.assertTrue(paymentInfoPhone.getText().contains(testPhone), "Номер телефона в инфо-блоке отображается некорректно");
+        WebElement paymentInfoPhone = mainPage.waitForVisibilityLocatedBy(By.xpath("/html/body/app-root/div/div/div/app-payment-container/section/div/div/div[2]/span"));
+        Assertions.assertTrue(paymentInfoPhone.getText().contains("Оплата: Услуги связи Номер:375" + testPhone), "Номер телефона в инфо-блоке отображается некорректно");
+       
+        WebElement cardNumberField = mainPage.waitForVisibilityLocatedBy(By.xpath("/html/body/app-root/div/div/div/app-payment-container/section/div/app-card-page/div/div[1]/app-card-input/form/div[1]/div[1]/app-input/div"));
+        Assertions.assertTrue(cardNumberField.getText().contains("Номер карты"), "Неверная надпись в поле номера карты");
 
-        WebElement cardNumberField = mainPage.waitForVisibilityLocatedBy(By.id("card-number"));
-        Assertions.assertEquals("Номер карты", cardNumberField.getAttribute("placeholder"), "Неверная надпись в поле номера карты");
+        WebElement cardExpiryField = mainPage.waitForVisibilityLocatedBy(By.xpath("/html/body/app-root/div/div/div/app-payment-container/section/div/app-card-page/div/div[1]/app-card-input/form/div[1]/div[2]/div[1]/app-input/div/div/div[1]"));
+        Assertions.assertTrue(cardExpiryField.getText().contains("Срок действия"), "Неверная надпись в поле срока действия");
 
-        WebElement cardExpiryField = mainPage.waitForVisibilityLocatedBy(By.id("card-expiry"));
-        Assertions.assertEquals("Срок действия", cardExpiryField.getAttribute("placeholder"), "Неверная надпись в поле срока действия");
-
-        WebElement cardCvcField = mainPage.waitForVisibilityLocatedBy(By.id("card-cvc"));
-        Assertions.assertEquals("CVC", cardCvcField.getAttribute("placeholder"), "Неверная надпись в поле CVC");
+        WebElement cardCvcField = mainPage.waitForVisibilityLocatedBy(By.xpath("/html/body/app-root/div/div/div/app-payment-container/section/div/app-card-page/div/div[1]/app-card-input/form/div[1]/div[2]/div[3]/app-input/div/div/div[1]"));
+        Assertions.assertTrue(cardCvcField.getText().contains("CVC"), "Неверная надпись в поле CVC");
         
-        List<WebElement> paymentIcons = driver.findElements(By.xpath("//div[contains(@class, 'payment-systems')]//img"));
+        List<WebElement> paymentIcons = driver.findElements(By.xpath("/html/body/app-root/div/div/div/app-payment-container/section/div/app-card-page/div/div[1]/app-card-input/form/div[1]/div[1]/app-input/div/div/div[2]/div/div/img[1]"));
         Assertions.assertFalse(paymentIcons.isEmpty(), "Иконки платёжных систем (Visa/Mastercard/Белкарт) отсутствуют в окне оплаты");
     }
 }
