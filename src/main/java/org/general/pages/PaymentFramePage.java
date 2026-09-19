@@ -10,7 +10,7 @@ public class PaymentFramePage {
     private final WebDriver driver;
     private final WebDriverWait wait;
 
-    // Локаторы для элементов внутри iframe
+    // Локаторы элементов внутри iframe
     private final By paymentInfoSum = By.xpath("//div[contains(@class, 'payment-page__title')]//span[contains(text(), 'BYN')] | //span[contains(text(), 'BYN')]");
     private final By payButton = By.xpath("//html/body/app-root/div/div/div/app-payment-container/section/div/app-card-page/div/div[1]/button/span");
     private final By paymentInfoPhone = By.xpath("//span[contains(text(), 'Оплата:') or contains(text(), 'Номер:')]");
