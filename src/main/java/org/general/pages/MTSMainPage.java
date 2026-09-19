@@ -93,7 +93,6 @@ public class MTSMainPage {
         wait.until(ExpectedConditions.elementToBeClickable(submitButton)).click();
     }
 
-    // Получение текста и состояния элементов
     public String getPaymentBlockTitleText() { return wait.until(ExpectedConditions.visibilityOfElementLocated(paymentBlockTitle)).getText().trim(); }
     public void clickDetailsLink() { wait.until(ExpectedConditions.elementToBeClickable(detailsLink)).click(); }
     
@@ -102,7 +101,6 @@ public class MTSMainPage {
         try { return labels.stream().allMatch(label -> driver.findElement(label).isDisplayed()); } catch (Exception e) { return false; }
     }
 
-    // Геттеры для плейсхолдеров
     public String getPhonePlaceholder() { return wait.until(ExpectedConditions.visibilityOfElementLocated(phoneInputField)).getAttribute("placeholder"); }
     public String getSumPlaceholder() { return wait.until(ExpectedConditions.visibilityOfElementLocated(sumInputField)).getAttribute("placeholder"); }
     public String getEmailPlaceholder() { return wait.until(ExpectedConditions.visibilityOfElementLocated(emailInputField)).getAttribute("placeholder"); }
